@@ -5,5 +5,3 @@ class CrawService:
         browser = webdriver.Chrome(executable_path='chromedriver.exe')
         browser.get(url)
         return browser
-        # html = HTML(html=browser.page_source)
-        # return html
