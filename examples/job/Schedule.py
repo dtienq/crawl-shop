@@ -1,12 +1,12 @@
 import schedule
 
-from .ShopeeCrawler import ShopeeCrawler
-from .LazadaCrawler import LazadaCrawler
+from ..service.ShopeeCrawler import ShopeeCrawler
+from ..service.LazadaCrawler import LazadaCrawler
 from ..base.base import session_factory
 
 
 class Schedule:
-    def job(self):
+    def job():
         session = session_factory()
 
         session.execute('''TRUNCATE TABLE product RESTART IDENTITY''')
@@ -18,3 +18,9 @@ class Schedule:
 
         ShopeeCrawler.craw()
         LazadaCrawler.craw()
+
+    schedule.every().hour.at(':00').do(job)
+
+    def run(self):
+        while 1:
+            schedule.run_pending()
